@@ -1,0 +1,64 @@
+VERSION 5.00
+Begin VB.Form Form1 
+   Caption         =   "Form1"
+   ClientHeight    =   1950
+   ClientLeft      =   45
+   ClientTop       =   330
+   ClientWidth     =   3495
+   LinkTopic       =   "Form1"
+   ScaleHeight     =   1950
+   ScaleWidth      =   3495
+   StartUpPosition =   3  '系統預設值
+   Begin VB.Timer Timer1 
+      Left            =   120
+      Top             =   960
+   End
+   Begin VB.CommandButton Command2 
+      Caption         =   "結束"
+      Height          =   372
+      Left            =   2040
+      TabIndex        =   2
+      Top             =   1320
+      Width           =   972
+   End
+   Begin VB.CommandButton Command1 
+      Caption         =   "開始"
+      Height          =   372
+      Left            =   720
+      TabIndex        =   1
+      Top             =   1320
+      Width           =   972
+   End
+   Begin VB.HScrollBar HScroll1 
+      Height          =   372
+      Left            =   360
+      Max             =   100
+      TabIndex        =   0
+      Top             =   360
+      Width           =   2775
+   End
+End
+Attribute VB_Name = "Form1"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Dim flag As Integer     '設定flag為全域變數
+Private Sub Command1_Click()
+   Timer1.Interval = 10 '設定計時器的時間間隔
+   flag = 0             '設定由左向右移的狀態
+End Sub
+
+Private Sub Command2_Click()
+   End
+End Sub
+
+Private Sub Timer1_Timer()
+   If flag = 0 Then                '捲動鈕由左向右移的狀態
+      HScroll1.Value = HScroll1.Value + 1    '位置向右移1
+      If HScroll1.Value = 100 Then flag = 1  '到尾就轉向左
+   Else                            '捲動鈕由右向左移的狀態
+      HScroll1.Value = HScroll1.Value - 1    '位置向左移1
+      If HScroll1.Value = 0 Then flag = 0    '到頭就轉向右
+   End If
+End Sub
